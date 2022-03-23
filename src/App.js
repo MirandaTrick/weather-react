@@ -1,14 +1,14 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import axios from "axios";
+import Weather from "./Weather.js";
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
+        <p>Hello React</p>
         <a
           className="App-link"
           href="https://reactjs.org"
@@ -17,6 +17,7 @@ function App() {
         >
           Learn React
         </a>
+        <Weather />
       </header>
     </div>
   );
