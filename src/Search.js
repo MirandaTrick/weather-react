@@ -48,7 +48,7 @@ export default function Search() {
           <li> Wind Speed: {Math.round(weather.wind)} kmph </li>
           <li>
             {" "}
-            <img src={weather.icon} />{" "}
+            <img src={weather.icon} alt="weather icon" />{" "}
           </li>
         </ul>
       </div>
