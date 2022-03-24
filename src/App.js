@@ -1,6 +1,5 @@
-import logo from "./logo.svg";
 import "./App.css";
-import axios from "axios";
+
 import Search from "./Search";
 
 function App() {
@@ -17,7 +16,7 @@ function App() {
           href="https://github.com/MirandaTrick/weather-react.git"
           target="blank"
         >
-          Open Source coded{" "}
+          Open Source Coded{" "}
         </a>
         by Miranda Trick
       </footer>
