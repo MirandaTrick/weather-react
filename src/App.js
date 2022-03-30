@@ -5,11 +5,7 @@ import Search from "./Search";
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <p>Weather Search Engine</p>
-
-        <Search />
-      </header>
+      <Search />
       <footer>
         {" "}
         <a
@@ -20,7 +16,6 @@ function App() {
         </a>
         by Miranda Trick
       </footer>
-      ;
     </div>
   );
 }

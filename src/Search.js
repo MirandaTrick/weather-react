@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import "./Search.css";
 
 export default function Search() {
   let [city, setCity] = useState("");
@@ -9,6 +10,7 @@ export default function Search() {
   function showTemperature(response) {
     setResult(true);
     setWeather({
+      location: response.data.name,
       temperature: response.data.main.temp,
       humidity: response.data.main.humidity,
       description: response.data.weather[0].description,
@@ -29,8 +31,22 @@ export default function Search() {
 
   let form = (
     <form className="searchBar" onSubmit={handleSubmit}>
-      <input type="search" placeholder="Enter a city" onChange={getResult} />
-      <input type="submit" value="Search" />
+      <div class="input-group mb-3">
+        <input
+          type="search"
+          className="form-control"
+          placeholder="Enter a city"
+          aria-describedby="button-addon2"
+          autoFocus="on"
+          onChange={getResult}
+        />
+        <button class="btn btn-primary" type="submit" id="button-addon2">
+          Search
+        </button>
+        <button class="btn btn-primary" type="submit" id="button-addon2">
+          Current Location
+        </button>
+      </div>
       <br />
       <br />
       {result}
@@ -39,18 +55,28 @@ export default function Search() {
 
   if (result) {
     return (
-      <div>
-        {form}
-        <ul>
-          <li> Temperature: {Math.round(weather.temperature)}°c </li>
-          <li> Description: {weather.description} </li>
-          <li> Humidity: {Math.round(weather.humidity)}% </li>
-          <li> Wind Speed: {Math.round(weather.wind)} kmph </li>
-          <li>
-            {" "}
-            <img src={weather.icon} alt="weather icon" />{" "}
-          </li>
-        </ul>
+      <div className="search">
+        <div>
+          {form}
+          <h1> {weather.location} </h1>
+          <div className="row">
+            <div className="col-6">
+              <img src={weather.icon} alt="weather icon" />
+              <span className="temperature">
+                {" "}
+                {Math.round(weather.temperature)}{" "}
+                <span className="unit"> °c</span>
+              </span>
+            </div>
+            <div className="col-6">
+              <ul>
+                <li> {weather.description} </li>
+                <li> Humidity: {Math.round(weather.humidity)}% </li>
+                <li> Wind Speed: {Math.round(weather.wind)} kmph </li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     );
   } else {
