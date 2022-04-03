@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./Search.css";
+import FormattedDate from "./FormattedDate";
 
 export default function Search() {
   let [city, setCity] = useState("");
@@ -10,6 +11,7 @@ export default function Search() {
   function showTemperature(response) {
     setResult(true);
     setWeather({
+      date: new Date(response.data.dt * 1000),
       location: response.data.name,
       temperature: response.data.main.temp,
       humidity: response.data.main.humidity,
@@ -59,6 +61,9 @@ export default function Search() {
         <div>
           {form}
           <h1> {weather.location} </h1>
+          <h2>
+            <FormattedDate date={weather.date} />
+          </h2>
           <div className="row">
             <div className="col-6">
               <img src={weather.icon} alt="weather icon" />
