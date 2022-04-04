@@ -3,6 +3,7 @@ import axios from "axios";
 import "./Search.css";
 import FormattedDate from "./FormattedDate";
 import App from "./App";
+import WeatherInfo from "./WeatherInfo";
 
 export default function Search(props) {
   let [city, setCity] = useState(props.defaultCity);
@@ -62,31 +63,9 @@ export default function Search(props) {
 
   if (result) {
     return (
-      <div className="search">
-        <div>
-          {form}
-          <h1> {weather.location} </h1>
-          <h2>
-            <FormattedDate date={weather.date} />
-          </h2>
-          <div className="row">
-            <div className="col-6">
-              <img src={weather.icon} alt="weather icon" />
-              <span className="temperature">
-                {" "}
-                {Math.round(weather.temperature)}{" "}
-                <span className="unit"> °c</span>
-              </span>
-            </div>
-            <div className="col-6">
-              <ul>
-                <li className="text-capitalize"> {weather.description} </li>
-                <li> Humidity: {Math.round(weather.humidity)}% </li>
-                <li> Wind Speed: {Math.round(weather.wind)} kmph </li>
-              </ul>
-            </div>
-          </div>
-        </div>
+      <div>
+        {form}
+        <WeatherInfo data={weather} />
       </div>
     );
   } else {
