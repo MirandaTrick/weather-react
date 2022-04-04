@@ -8,8 +8,13 @@ export default function Search() {
   let [result, setResult] = useState(false);
   let [weather, setWeather] = useState({});
 
+  function handleSubmit(event) {
+    event.preventDefault();
+    let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=03449882dfe5aced439e51d0cb6c2b82&units=metric`;
+    axios.get(url).then(showTemperature);
+  }
+
   function showTemperature(response) {
-    setResult(true);
     setWeather({
       date: new Date(response.data.dt * 1000),
       location: response.data.name,
@@ -19,12 +24,7 @@ export default function Search() {
       wind: response.data.wind.speed,
       icon: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
     });
-  }
-
-  function handleSubmit(event) {
-    event.preventDefault();
-    let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=03449882dfe5aced439e51d0cb6c2b82&units=metric`;
-    axios.get(url).then(showTemperature);
+    setResult(true);
   }
 
   function getResult(event) {
@@ -45,7 +45,7 @@ export default function Search() {
         <button class="btn btn-primary" type="submit" id="button-addon2">
           Search
         </button>
-        <button class="btn btn-primary" type="submit" id="button-addon2">
+        <button class="btn btn-danger" type="submit" id="button-addon2">
           Current Location
         </button>
       </div>
@@ -75,7 +75,7 @@ export default function Search() {
             </div>
             <div className="col-6">
               <ul>
-                <li> {weather.description} </li>
+                <li className="text-capitalize"> {weather.description} </li>
                 <li> Humidity: {Math.round(weather.humidity)}% </li>
                 <li> Wind Speed: {Math.round(weather.wind)} kmph </li>
               </ul>
