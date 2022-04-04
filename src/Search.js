@@ -2,17 +2,12 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./Search.css";
 import FormattedDate from "./FormattedDate";
+import App from "./App";
 
-export default function Search() {
-  let [city, setCity] = useState("");
+export default function Search(props) {
+  let [city, setCity] = useState(props.defaultCity);
   let [result, setResult] = useState(false);
   let [weather, setWeather] = useState({});
-
-  function handleSubmit(event) {
-    event.preventDefault();
-    let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=03449882dfe5aced439e51d0cb6c2b82&units=metric`;
-    axios.get(url).then(showTemperature);
-  }
 
   function showTemperature(response) {
     setWeather({
@@ -27,8 +22,18 @@ export default function Search() {
     setResult(true);
   }
 
+  function handleSubmit(event) {
+    event.preventDefault();
+    searchDefault();
+  }
+
   function getResult(event) {
     setCity(event.target.value);
+  }
+
+  function searchDefault() {
+    let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=03449882dfe5aced439e51d0cb6c2b82&units=metric`;
+    axios.get(url).then(showTemperature);
   }
 
   let form = (
@@ -85,6 +90,7 @@ export default function Search() {
       </div>
     );
   } else {
+    searchDefault();
     return form;
   }
 }
